@@ -4,7 +4,7 @@
     {
         public Attributes Stats { get; set; }
         public List<Skill> Skills { get; set; }
-        public List<object> Equipment { get; set; }
+        public List<Equipment> Equipment { get; set; }
         public int Score { get; set; }
         public int Experience { get; set; }
         public int Level { get; set; }

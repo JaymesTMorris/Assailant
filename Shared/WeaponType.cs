@@ -11,11 +11,11 @@ namespace Shared
     {
         NotSet = 0,
         OneHander = 1 << 0,
-        TwoHander = 1 << 2,
-        Bow = 1 << 3,
-        Wand = 1 << 4,
-        Staff = 1 << 5,
-        Shield= 1 << 6,
-        All = ~(~1<<4)
+        TwoHander = 1 << 1,
+        Bow = 1 << 2,
+        Wand = 1 << 3,
+        Staff = 1 << 4,
+        Shield= 1 << 5,
+        All = ~(~0<<6)
     }
 }
