@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shared.Skills.BowBasicAttack
 {
-    public class BowBasicAttackEffect
+    public class BowBasicAttackEffect:SkillEffect
     {
-        public Character Target { get; set; }
-        public int ManaCost { get; set; }
-        public void Action()
+        public override void Action(Combatant caster, Combatant opponent)
         {
             
         }

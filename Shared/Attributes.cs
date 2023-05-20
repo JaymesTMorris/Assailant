@@ -8,8 +8,8 @@ namespace Shared
 {
     public class Attributes
     {
-        public float BaseHP { get; set; }
-        public float BaseMana { get; set; }
+        public float HP { get; set; }
+        public float Mana { get; set; }
         public float Strength { get; set; }
         public float Agility { get; set; }
         public float Constitution { get; set; }

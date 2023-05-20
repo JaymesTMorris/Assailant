@@ -2,7 +2,8 @@
 {
     public class Character  
     {
-        public Attributes Stats { get; set; }
+        public Attributes BaseStats { get; set; }
+        public Attributes CurrentStats { get; set; }
         public SkillLoadout Skills { get; set; }
         public EquipmentSet EquipedItems { get; set; }
         public int Score { get; set; }

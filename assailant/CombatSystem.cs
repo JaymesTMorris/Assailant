@@ -1,31 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using assailant;
 using Shared;
 
 public class CombatSystem
 {
-	List<Combatant> Combatants = new List<Combatant>();
+    Combatant CombatantOne { get; set; }
+    Combatant CombatantTwo { get; set; }
 
-    CombatSystem(List<Combatant> combatants)
+    public CombatSystem(Combatant one, Combatant two)
 	{
-		Combatants = combatants;
+        CombatantOne = one;
+        CombatantOne.Opponent = two;
+        CombatantTwo = two;
+        CombatantTwo.Opponent = one;
 	}
-	public void Update(double delta)
+	public bool Update(double delta)
 	{
 
-        foreach(var combatant in Combatants)
-        {
+        CombatantOne.Update(delta);
+        CombatantTwo.Update(delta);
 
-            combatant.Update(delta);
-        }
-    }
-
-
-    static Stopwatch _Stopwatch = Stopwatch.StartNew();
-
-    public double hires_time_in_seconds()
-    {
-        return _Stopwatch.ElapsedMilliseconds/1000;
+        return CombatantOne.CurrentStats.HP > 0 && CombatantTwo.CurrentStats.HP > 0;
 
     }
+
+
+
 }

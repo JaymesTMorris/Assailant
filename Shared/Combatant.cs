@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Shared
 {
     public class Combatant:Character
     {
+        public Combatant Opponent { get; set; }
         public double RecoveryTimeRemaining { get; set; } = 0;
         public double CastTimeRemaining { get; set; } = 0;
         public CombatState State { get; set; }
@@ -72,7 +74,7 @@ namespace Shared
         {
             RecoveryTimeRemaining = skill.RecoveryTime;
             State = CombatState.Recovering;
-            //Do Skill
+            skill.Effect.Action(this, Opponent);
         }
     }
 }
