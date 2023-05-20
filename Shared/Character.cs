@@ -3,8 +3,8 @@
     public class Character  
     {
         public Attributes Stats { get; set; }
-        public List<Skill> Skills { get; set; }
-        public List<Equipment> Equipment { get; set; }
+        public SkillLoadout Skills { get; set; }
+        public EquipmentSet EquipedItems { get; set; }
         public int Score { get; set; }
         public int Experience { get; set; }
         public int Level { get; set; }

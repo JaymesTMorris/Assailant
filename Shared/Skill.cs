@@ -12,9 +12,11 @@ namespace Shared
         public SkillType Type { get; set; }
         public string? Description { get; set; }
         public int EffectId { get; set; }
-        public int Cooldown { get; set; }
-        public int RecoveryTime { get; set; }
-        public int CastTime { get; set; }
+        public double Cooldown { get; set; }
+        public double RecoveryTime { get; set; }
+        public double CastTime { get; set; }
         public WeaponType MyProperty { get; set; }
+        public double RemainingCooldown { get; set; }
+
     }
 }

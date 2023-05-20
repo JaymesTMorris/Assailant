@@ -8,6 +8,7 @@ namespace Shared
 {
     public class Player
     {
+        public string DisplayName { get; set; }
         public List<Character> Characters { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
