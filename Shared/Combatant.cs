@@ -55,6 +55,7 @@ namespace Shared
         {
             State = CombatState.Casting;
             CastTimeRemaining = skill.CastTime;
+            SkillBeingCasted = skill;
 
         }
 
@@ -72,9 +73,10 @@ namespace Shared
 
         private void ExecuteSkill(Skill skill)
         {
-            RecoveryTimeRemaining = skill.RecoveryTime;
-            State = CombatState.Recovering;
             skill.Effect.Action(this, Opponent);
+            SkillBeingCasted = null;
+            State = CombatState.Recovering;
+            RecoveryTimeRemaining = skill.RecoveryTime;
         }
     }
 }
