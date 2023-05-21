@@ -7,5 +7,5 @@ build_property.InvariantGlobalization =
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
-build_property.RootNamespace = assailant
-build_property.ProjectDir = C:\Users\Jayme\OneDrive\Documents\GitHub\Assailant\assailant\
+build_property.RootNamespace = Assailant_Service_Server
+build_property.ProjectDir = C:\Users\Jayme\OneDrive\Documents\GitHub\Assailant\Assailant_Service_Server\
