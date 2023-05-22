@@ -21,7 +21,7 @@ public class CombatSystem
         CombatantOne.Update(delta);
         CombatantTwo.Update(delta);
 
-        return CombatantOne.CurrentStats.HP > 0 && CombatantTwo.CurrentStats.HP > 0;
+        return CombatantOne.Stats.HP.FinalValue > 0 && CombatantTwo.Stats.HP.FinalValue > 0;
 
     }
 
