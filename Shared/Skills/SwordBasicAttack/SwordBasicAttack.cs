@@ -14,11 +14,11 @@ namespace Shared.Skills.BowBasicAttack
             Type = SkillType.BasicAttack;
             WeaponsUsability = WeaponType.OneHander;
             RecoveryTime = 1;
-            CastTime = 1;
-            Cooldown = 10;
+            CastTime = .5;
+            Cooldown = 5;
             Cost = 5;
             Name = "Basic Sword Attack";
-            Effect = new SwordBasicAttackEffect();
+            Effect = new BasicAttackEffect();
         }
     }
 }

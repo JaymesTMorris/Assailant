@@ -102,13 +102,37 @@ namespace Shared
 
         public int CalcDmgToDeal(int damage, DamageType damageType)
         {
-            return damage;
+            double multiplier = 1;
+            if (DamageType.Magic == damageType)
+            {
+                multiplier = Stats.SpellPower.FinalValue / (double)100;
+            }
+            else if (damageType == DamageType.Physical)
+            {
+                multiplier = Stats.AttackPower.FinalValue / (double)100;
+            }
+            return (int)(damage * multiplier);
         }
 
         public void ApplyDamage(int damage, DamageType damageType)
         {
-            Logger.LogInformation("{Combatant} takes {damage} of {damageType}", Name, damage, damageType);
+
+            
+            if(damageType == DamageType.Physical)
+            {
+                damage = (int)((10 * damage * damage) / (double)Stats.PhysicalArmor.FinalValue + 10 * damage);
+            }
+            else if (DamageType.Magic == damageType) 
+            {
+                damage = (int)((10 * damage * damage) / (double)Stats.MagicArmor.FinalValue + 10 * damage);
+            }
+            Logger.LogInformation("{Combatant} takes {damage} of {damageType} damage", Name, damage, damageType);
+
             Stats.RemainingHP -= damage;
+            if (Stats.RemainingHP < 0)
+            {
+                Stats.RemainingHP = 0;
+            }
             Logger.LogInformation("{Combatant} has {health} HP remaining.", Name, Stats.RemainingHP);
         }
 

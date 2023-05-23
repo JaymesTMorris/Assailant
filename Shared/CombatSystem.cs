@@ -31,7 +31,7 @@ namespace Shared
             CombatantOne.Update(delta);
             CombatantTwo.Update(delta);
 
-            var stillFighting= CombatantOne.Stats.HP.FinalValue > 0 && CombatantTwo.Stats.HP.FinalValue > 0;
+            var stillFighting= CombatantOne.Stats.RemainingHP > 0 && CombatantTwo.Stats.RemainingHP > 0;
             if(!stillFighting)
             {
                 Logger.LogInformation("It is finished!!!");

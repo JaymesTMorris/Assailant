@@ -14,11 +14,11 @@ namespace Shared.Skills.BowBasicAttack
             Type = SkillType.BasicAttack;
             WeaponsUsability = WeaponType.Bow;
             RecoveryTime = 1;
-            CastTime = 1.5;
+            CastTime = 1;
             Cooldown = 15;
-            Cost = 5;
+            Cost = 50;
             Name = "Basic Staff Attack";
-            Effect = new StaffBasicAttackEffect();
+            Effect = new BasicAttackEffect();
         }
     }
 }

@@ -15,10 +15,10 @@ namespace Shared.Skills.BowBasicAttack
             WeaponsUsability = WeaponType.Bow;
             RecoveryTime = 1;
             CastTime = 2;
-            Cooldown = 30;
-            Cost = 5000;
+            Cooldown = 20;
+            Cost = 100;
             Name = "Basic Bow Attack";
-            Effect = new BowBasicAttackEffect();
+            Effect = new BasicAttackEffect();
         }
     }
 }
