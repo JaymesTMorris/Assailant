@@ -8,9 +8,11 @@ namespace Shared
 {
     public class SkillEffect
     {
+        public int Damage { get; set; } = 100;
+        public DamageType DamageType { get; set; } = DamageType.Physical;
         public virtual void Action(Combatant caster, Combatant opponent)
         {
-            throw new NotImplementedException();
+            opponent.ApplyDamage(caster.CalcDmgToDeal(Damage, DamageType), DamageType);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared.Skills.BowBasicAttack
 {
-    public class BowBasicAttackEffect:SkillEffect
+    public class StaffBasicAttackEffect:SkillEffect
     {
     }
 }

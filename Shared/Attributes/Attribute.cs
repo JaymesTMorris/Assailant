@@ -12,7 +12,8 @@ namespace Shared.Attributes
         List<BaseAttribute> Bonuses= new List<BaseAttribute>();
         protected int _FinalValue;
         public int FinalValue { get { return CalculateValue(); }}
-        public Attribute(int startingValue) 
+
+        public Attribute(int startingValue=100) 
             : base(startingValue)
         {
             _FinalValue= BaseValue;

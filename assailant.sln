@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "assailant", "assailant\assa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{5A7F1650-E090-482E-A751-0B04596FB785}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assailant_Service_Server", "Assailant_Service_Server\Assailant_Service_Server.csproj", "{D200FBF2-9D6D-4DDE-BEC3-BBE47AA5FAFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assailant_Service_Server", "Assailant_Service_Server\Assailant_Service_Server.csproj", "{D200FBF2-9D6D-4DDE-BEC3-BBE47AA5FAFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

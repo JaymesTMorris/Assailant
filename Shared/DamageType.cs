@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.Skills.BowBasicAttack
+namespace Shared
 {
-    public class BowBasicAttackEffect:SkillEffect
+    public enum DamageType
     {
+        Magic,
+        Physical,
+        True
     }
 }

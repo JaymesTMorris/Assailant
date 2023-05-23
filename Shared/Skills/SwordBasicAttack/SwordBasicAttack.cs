@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace Shared.Skills.BowBasicAttack
 {
-    public class BowBasicAttack : Skill
+    public class SwordBasicAttack : Skill
     {
-        public BowBasicAttack()
+        public SwordBasicAttack()
         {
             Type = SkillType.BasicAttack;
-            WeaponsUsability = WeaponType.Bow;
+            WeaponsUsability = WeaponType.OneHander;
             RecoveryTime = 1;
-            CastTime = 2;
-            Cooldown = 30;
-            Cost = 5000;
-            Name = "Basic Bow Attack";
-            Effect = new BowBasicAttackEffect();
+            CastTime = 1;
+            Cooldown = 10;
+            Cost = 5;
+            Name = "Basic Sword Attack";
+            Effect = new SwordBasicAttackEffect();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Shared.Attributes
 {
     public class PoolAttribute : SeconadaryAttribute
     {
-        public PoolAttribute(int startingValue) : base(startingValue)
+        public PoolAttribute(int startingValue=1200) : base(startingValue)
         {
         }
 
