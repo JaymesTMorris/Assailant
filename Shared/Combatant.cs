@@ -105,11 +105,11 @@ namespace Shared
             double multiplier = 1;
             if (DamageType.Magic == damageType)
             {
-                multiplier = Stats.SpellPower.FinalValue / (double)100;
+                multiplier = Stats.SpellPower.FinalValue / (double)250;
             }
             else if (damageType == DamageType.Physical)
             {
-                multiplier = Stats.AttackPower.FinalValue / (double)100;
+                multiplier = Stats.AttackPower.FinalValue / (double)250;
             }
             return (int)(damage * multiplier);
         }

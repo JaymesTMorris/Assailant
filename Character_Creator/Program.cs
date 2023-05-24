@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Reflection.PortableExecutable;
 using System.Security.Cryptography;
+using DataAccess;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Relational;
 using Shared;
@@ -68,7 +69,11 @@ class Program
         Console.Write("Physical Armor: ");
         physArmor = int.Parse(Console.ReadLine());
         characterToAdd.Stats = new Shared.Attributes.Attributes(hp, mp, str, agl, con, intel, wis, atkPwr, spPwr, mgArmor, physArmor);
-
+        /*
+         var dbModel = GameObjectToDBModel(characterToAdd, 1, 1);
+         var CharacterDAO = new CharacterDAO(con);
+         CharacterDAO.Save(dbModel);
+         */
         string json = Newtonsoft.Json.JsonConvert.SerializeObject(characterToAdd);
         string cmdText = $"INSERT INTO `character` (name, playerId, characterJSON) VALUES ('{characterToAdd.Name}', 1, '{json}');";
 
@@ -142,4 +147,18 @@ class Program
         WriteLineCentered("3. Exit                    ");
         Console.Write(new string(' ', (Console.WindowWidth / 2) - 14) + "> ");
     }
+
+    private static CharacterModel GameObjectToDBModel(Character gameObject, int characterId, int playerId)
+{
+    string json = Newtonsoft.Json.JsonConvert.SerializeObject(gameObject);
+
+    return new CharacterModel()
+    {
+        CharacterId = characterId,
+        Name = gameObject.Name,
+        JSON = json,
+        PlayerId = playerId
+    };
+}
+
 }
