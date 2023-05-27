@@ -79,12 +79,11 @@ namespace Shared
 
         private void Cast(Skill skill)
         {
-            Logger.LogInformation("{Combatant} begins {skill}", Name, skill.Name);
             State = CombatState.Casting;
             Stats.RemainingMP-= skill.Cost;
             CastTimeRemaining = skill.CastTime;
             SkillBeingCasted = skill;
-            Logger.LogInformation("{Combatant} has {mana} MP remaining", Name, Stats.RemainingMP);
+            Logger.LogInformation("{Combatant} begins {skill} costing {cost} has {mana} MP remaining", Name, skill.Name, skill.Cost, Stats.RemainingMP);
         }
 
         private void ReduceCooldowns(double delta)
@@ -135,14 +134,13 @@ namespace Shared
             {
                 damage = (int)((10 * damage * damage) / (double)Stats.MagicArmor.FinalValue + 10 * damage);
             }
-            Logger.LogInformation("{Combatant} takes {damage} of {damageType} damage", Name, damage, damageType);
 
             Stats.RemainingHP -= damage;
             if (Stats.RemainingHP < 0)
             {
                 Stats.RemainingHP = 0;
             }
-            Logger.LogInformation("{Combatant} has {health} HP remaining.", Name, Stats.RemainingHP);
+            Logger.LogInformation("{Combatant} takes {damage} of {damageType} damage and has {health} HP remaining.", Name, damage, damageType, Stats.RemainingHP);
         }
 
     }
