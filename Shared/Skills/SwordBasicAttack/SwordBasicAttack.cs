@@ -12,7 +12,7 @@ namespace Shared.Skills.BowBasicAttack
         public SwordBasicAttack()
         {
             Type = SkillType.BasicAttack;
-            WeaponsUsability = WeaponType.OneHander;
+            WeaponsUsability = WeaponTypes.OneHander;
             RecoveryTime = 1;
             CastTime = .5;
             Cooldown = 5;

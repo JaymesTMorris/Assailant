@@ -12,7 +12,7 @@ namespace Shared.Skills.BowBasicAttack
         public BowBasicAttack()
         {
             Type = SkillType.BasicAttack;
-            WeaponsUsability = WeaponType.Bow;
+            WeaponsUsability = WeaponTypes.Bow;
             RecoveryTime = 1;
             CastTime = 2;
             Cooldown = 20;

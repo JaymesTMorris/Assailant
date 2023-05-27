@@ -9,7 +9,7 @@ namespace Shared
     public class SkillEffect
     {
         public int Damage { get; set; } = 100;
-        public DamageType DamageType { get; set; } = DamageType.Physical;
+        public DamageTypes DamageType { get; set; } = DamageTypes.Physical;
         public virtual void Action(Combatant caster, Combatant opponent)
         {
             opponent.ApplyDamage(caster.CalcDmgToDeal(Damage, DamageType), DamageType);

@@ -13,8 +13,8 @@ namespace Shared.Attributes
         protected int _FinalValue;
         public int FinalValue { get { return CalculateValue(); }}
 
-        public Attribute(int startingValue=100) 
-            : base(startingValue)
+        public Attribute(int startingValue= 10, float baseMultiplier = 0, AttributeType type = AttributeType.None) 
+            : base(startingValue, baseMultiplier, type)
         {
             _FinalValue= BaseValue;
         }

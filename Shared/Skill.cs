@@ -15,7 +15,7 @@ namespace Shared
         public double Cooldown { get; set; }
         public double RecoveryTime { get; set; }
         public double CastTime { get; set; }
-        public WeaponType WeaponsUsability { get; set; }
+        public WeaponTypes WeaponsUsability { get; set; }
         public double RemainingCooldown { get; set; }
         public int Cost { get; set; }
 

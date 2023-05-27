@@ -24,14 +24,14 @@ Combatant one = new Combatant()
 {
     Name= "A",
     Skills = new SkillLoadout() { SlotThree = new BowBasicAttack(),  SlotTwo = new SwordBasicAttack(), SlotOne = new StaffBasicAttack()},
-    EquipedItems = new EquipmentSet() {Weapon = new Weapon() { DamageType = DamageType.Magic, MinDamage = 50, MaxDamage =450} },
+    EquipedItems = new EquipmentSet() {Weapon = new Weapon() { DamageType = DamageTypes.Magic, MinDamage = 50, MaxDamage =450} },
     Stats = new Shared.Attributes.Attributes()
 };
 Combatant two = new Combatant()
 {
     Name = "B",
     Skills = new SkillLoadout() { SlotOne = new BowBasicAttack(), SlotTwo = new SwordBasicAttack(), SlotThree = new StaffBasicAttack() },
-    EquipedItems = new EquipmentSet() { Weapon = new Weapon() { DamageType = DamageType.Magic, MinDamage = 200, MaxDamage = 300 } },
+    EquipedItems = new EquipmentSet() { Weapon = new Weapon() { DamageType = DamageTypes.Magic, MinDamage = 200, MaxDamage = 300 } },
     Stats = new Shared.Attributes.Attributes()
 };
 var combatSystem = new CombatSystem(one, two, loggerFactory.CreateLogger<CombatSystem>());

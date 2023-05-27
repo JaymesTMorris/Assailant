@@ -8,7 +8,7 @@ namespace Shared
 {
     public enum EquipmentSlot
     {
-        NotSet = 0,
+        None = 0,
         Head,
         Body,
         Legs,

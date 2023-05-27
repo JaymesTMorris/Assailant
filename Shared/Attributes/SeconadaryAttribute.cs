@@ -11,8 +11,8 @@ namespace Shared.Attributes
 
 
         protected List<Attribute> _OtherAttributes = new List<Attribute>();
-        public SeconadaryAttribute(int startingValue)
-            : base(startingValue)
+        public SeconadaryAttribute(int startingValue, float baseMultiplier = 0, AttributeType type = AttributeType.None)
+            : base(startingValue, baseMultiplier, type)
         {
 
         }

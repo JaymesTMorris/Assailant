@@ -28,8 +28,17 @@ namespace Shared
 
         private void Regen(double delta)
         {
-            //Stats.RemainingHP += Stats.HPRegen.FinalValue;
-            //Stats.RemainingMP += Stats.MPRegen.FinalValue;
+            Stats.RemainingHP += Stats.HPRegen.FinalValue;
+            if(Stats.RemainingHP> Stats.MaxHP.FinalValue)
+            {
+                Stats.RemainingHP = Stats.MaxHP.FinalValue;
+            }
+
+            Stats.RemainingMP += Stats.MPRegen.FinalValue;
+            if (Stats.RemainingMP > Stats.MaxMP.FinalValue)
+            {
+                Stats.RemainingMP = Stats.MaxMP.FinalValue;
+            }
         }
 
         private void UpdateCombatState(double delta)
@@ -100,29 +109,29 @@ namespace Shared
             skill.RemainingCooldown = skill.Cooldown;
         }
 
-        public int CalcDmgToDeal(int damage, DamageType damageType)
+        public int CalcDmgToDeal(int damage, DamageTypes damageType)
         {
             double multiplier = 1;
-            if (DamageType.Magic == damageType)
+            if (DamageTypes.Magic == damageType)
             {
                 multiplier = Stats.SpellPower.FinalValue / (double)250;
             }
-            else if (damageType == DamageType.Physical)
+            else if (damageType == DamageTypes.Physical)
             {
                 multiplier = Stats.AttackPower.FinalValue / (double)250;
             }
             return (int)(damage * multiplier);
         }
 
-        public void ApplyDamage(int damage, DamageType damageType)
+        public void ApplyDamage(int damage, DamageTypes damageType)
         {
 
             
-            if(damageType == DamageType.Physical)
+            if(damageType == DamageTypes.Physical)
             {
                 damage = (int)((10 * damage * damage) / (double)Stats.PhysicalArmor.FinalValue + 10 * damage);
             }
-            else if (DamageType.Magic == damageType) 
+            else if (DamageTypes.Magic == damageType) 
             {
                 damage = (int)((10 * damage * damage) / (double)Stats.MagicArmor.FinalValue + 10 * damage);
             }

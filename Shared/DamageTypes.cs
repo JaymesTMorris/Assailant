@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public enum EquipmentType
+    public enum DamageTypes
     {
-        NotSet = 0,
-        Armor = 1 << 0,
-        Weapon = 1 << 1
+        None = 0,
+        Magic = 1 << 0,
+        Physical = 1 << 1,
+        True = 1 << 2,
     }
 }

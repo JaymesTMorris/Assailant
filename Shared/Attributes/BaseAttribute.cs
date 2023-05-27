@@ -10,10 +10,12 @@ namespace Shared.Attributes
     {
         public int BaseValue { get; set; }
         public float BaseMultiplier { get; set; }
-        public BaseAttribute(int baseValue, float baseMultiplier=0)
+        public AttributeType AttributeType { get; set; }
+        public BaseAttribute(int baseValue=10, float baseMultiplier=0, AttributeType type = AttributeType.None)
         {
             BaseValue = baseValue;
             BaseMultiplier = baseMultiplier;
+            AttributeType = type;
         }
     }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Shared
 {
     [Flags]
-    public enum WeaponType
+    public enum WeaponTypes
     {
-        NotSet = 0,
+        None = 0,
         OneHander = 1 << 0,
         TwoHander = 1 << 1,
         Bow = 1 << 2,

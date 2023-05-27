@@ -9,7 +9,7 @@ namespace Shared
     [Flags]
     public enum SkillType
     {
-        NotSet = 0,
+        None = 0,
         Spell = 1 << 0,
         SpecialAttack = 1 << 2,
         BasicAttack = 1 <<3,

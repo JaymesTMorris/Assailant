@@ -8,9 +8,9 @@ namespace Shared
 {
     public class Weapon:Equipment
     {
-        public WeaponType Type { get; set; }
+        public WeaponTypes WeaponType { get; set; }
         public int MinDamage { get; set; }
         public int MaxDamage { get; set; }
-        public DamageType DamageType { get; set; }
+        public DamageTypes DamageType { get; set; }
     }
 }
