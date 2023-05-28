@@ -5,6 +5,7 @@ using Serilog;
 using Serilog.Debugging;
 using Shared;
 using Shared.Skills.BowBasicAttack;
+using Shared.Skills.GreaterHeal;
 using System.Data;
 
 Log.Logger = new LoggerConfiguration()
@@ -23,14 +24,14 @@ int desiredGameTicksPerSecond = 20;
 Combatant one = new Combatant()
 {
     Name= "A",
-    Skills = new SkillLoadout() { SlotThree = new BowBasicAttack(),  SlotTwo = new SwordBasicAttack(), SlotOne = new StaffBasicAttack()},
+    Skills = new SkillLoadout() { SlotThree = new BowBasicAttack(),  SlotTwo = new SwordBasicAttack(), SlotOne = new QuickHeal()},
     EquipedItems = new EquipmentSet() {Weapon = new Weapon() { DamageType = DamageTypes.Magic, MinDamage = 50, MaxDamage =450} },
     Stats = new Shared.Attributes.Attributes()
 };
 Combatant two = new Combatant()
 {
     Name = "B",
-    Skills = new SkillLoadout() { SlotOne = new BowBasicAttack(), SlotTwo = new SwordBasicAttack(), SlotThree = new StaffBasicAttack() },
+    Skills = new SkillLoadout() { SlotOne = new StaffBasicAttack(), SlotTwo = new SwordBasicAttack(), SlotThree = new GreaterHeal() },
     EquipedItems = new EquipmentSet() { Weapon = new Weapon() { DamageType = DamageTypes.Magic, MinDamage = 200, MaxDamage = 300 } },
     Stats = new Shared.Attributes.Attributes()
 };
