@@ -11,9 +11,11 @@ namespace Shared.Skills.GreaterHeal
     {
         public override void Action(Combatant caster, Combatant opponent)
         {
-            Damage = 125;
+            MinDamage = 115;
+            MaxDamage = 135;
+            int damage = new Random().Next(MinDamage, MaxDamage);
             var multiplier = caster.Stats.SpellPower.FinalValue / (double)250;
-            opponent.Stats.RemainingHP += (int)(Damage * multiplier);
+            opponent.Stats.RemainingHP += (int)(damage * multiplier);
             if (opponent.Stats.RemainingHP > opponent.Stats.MaxHP.FinalValue)
             {
                 opponent.Stats.RemainingHP = opponent.Stats.MaxHP.FinalValue;

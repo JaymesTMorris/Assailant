@@ -10,9 +10,11 @@ namespace Shared.Skills
     {
         public override void Action(Combatant caster, Combatant opponent)
         {
-            Damage = new Random().Next(caster.EquipedItems.Weapon.MinDamage, caster.EquipedItems.Weapon.MaxDamage);
+            MinDamage = caster.EquipedItems.Weapon.MinDamage;
+            MaxDamage = caster.EquipedItems.Weapon.MaxDamage;
+            int damage = new Random().Next(MinDamage, MaxDamage);
             DamageType = caster.EquipedItems.Weapon.DamageType;
-            opponent.ApplyDamage(caster.CalcDmgToDeal(Damage, DamageType), DamageType);
+            opponent.ApplyDamage(caster.CalcDmgToDeal(damage, DamageType), DamageType);
         }
     }
 }

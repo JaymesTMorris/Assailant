@@ -19,11 +19,33 @@ namespace Shared
         public double CastTimeRemaining { get; set; } = 0;
         public CombatState State { get; set; }
         public Skill? SkillBeingCasted { get; set; }
+
+        public List<SkillEffect> Activeffects { get; private set; } = new List<SkillEffect>();
         public void Update(double delta)
         {
             ReduceCooldowns(delta);
             UpdateCombatState(delta);
+            ProcessActiveEffects(delta);
             Regen(delta);
+        }
+
+        private void ProcessActiveEffects(double delta)
+        {
+            foreach(var effect in Activeffects)
+            {
+                effect.LastTrigger += (int)delta;
+                effect.Duration -= (int)delta;
+                if(effect.Duration<0)
+                {
+                    Activeffects.Remove(effect);
+                }
+
+                if(effect.LastTrigger >= effect.Freqency)
+                {
+                    effect.Action(this, Opponent);
+                    effect.LastTrigger = 0;
+                }
+            }
         }
 
         private void Regen(double delta)
@@ -120,6 +142,11 @@ namespace Shared
                 multiplier = Stats.AttackPower.FinalValue / (double)250;
             }
             return (int)(damage * multiplier);
+        }
+
+        public void ApplyEffect(SkillEffect effect)
+        {
+            Activeffects.Add(effect);
         }
 
         public void ApplyDamage(int damage, DamageTypes damageType)
