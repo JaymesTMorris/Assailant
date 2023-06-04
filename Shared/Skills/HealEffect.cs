@@ -4,14 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.Skills.QuickHeal
+namespace Shared.Skills
 {
-    public class QuickHealEffect : SkillEffect
+    public  class HealEffect:SkillEffect
     {
+        public HealEffect()
+            :this(100,125)
+        {
+        }
+
+        public HealEffect(int min, int max)
+        {
+            MinDamage = min;
+            MaxDamage = max;
+        }
         public override void Action(Combatant caster, Combatant opponent)
         {
-            MinDamage = 90;
-            MaxDamage = 110;
             int damage = new Random().Next(MinDamage, MaxDamage);
             var multiplier = caster.Stats.SpellPower.FinalValue / (double)250;
             opponent.Stats.RemainingHP += (int)(damage * multiplier);

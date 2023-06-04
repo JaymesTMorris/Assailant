@@ -2,23 +2,22 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.Skills.BowBasicAttack
+namespace Shared.Skills.Rejuvenation
 {
-    public class QuickHeal : Skill
+    public class Rejuvenation : Skill
     {
-        public QuickHeal()
+        public Rejuvenation()
         {
             Type = SkillType.Spell;
             RecoveryTime = .5;
             CastTime = .5;
             Cooldown = 10;
             Cost = 100;
-            Name = "Quick Heal";
-            Effect = new HealEffect(90, 110);
+            Name = "Rejuvenation";
+            Effect = new RejuvenationEffect();
         }
     }
 }

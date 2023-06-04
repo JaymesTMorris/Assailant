@@ -17,7 +17,7 @@ namespace Shared.Skills.GreaterHeal
             Cooldown = 15;
             Cost = 200;
             Name = "Greater Heal";
-            Effect = new GreaterHealEffect();
+            Effect = new HealEffect(115,135);
         }
     }
 }
