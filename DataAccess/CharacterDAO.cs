@@ -1,4 +1,5 @@
 ﻿using Assailant.DataAccess;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -30,6 +31,9 @@ namespace DataAccess
 
         public List<CharacterModel> FindAll(string where)
         {
+            // MySqlConnection connection = IDAO.GetConnection();
+            // MySqlConnection connection = new IDAO.GetConnection();
+            // Okay... now I know that I definitely do not understand interfaces.
             throw new NotImplementedException();
         }
 
@@ -38,10 +42,10 @@ namespace DataAccess
             throw new NotImplementedException();
         }
 
-        public DbConnection GetConnection()
-        {
-            throw new NotImplementedException();
-        }
+        //public DbConnection GetConnection()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public DbTransaction GetTransaction()
         {
