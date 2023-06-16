@@ -150,7 +150,7 @@ namespace Shared
             Activeffects.Add(effect);
         }
 
-        public void ApplyDamage(int damage, DamageTypes damageType, double attackerAccuracy)
+        public void ApplyDamage(int damage, DamageTypes damageType, double attackerAccuracy=100)
         {
             double evasion = 0; //Do we even want evasion? If so need to add an attribute to track and calculate evasion with
             double chanceToEvade = 1 - (attackerAccuracy * 1.25) / (attackerAccuracy + Math.Pow(evasion * .20, .9));
