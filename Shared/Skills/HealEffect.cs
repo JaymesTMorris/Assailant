@@ -17,6 +17,10 @@ namespace Shared.Skills
         {
             MinDamage = min;
             MaxDamage = max;
+            Resistable = false;
+            Evadable= false;
+            Blockable= false;
+            Parriable= false;
         }
         public override void Action(Combatant caster, Combatant opponent)
         {

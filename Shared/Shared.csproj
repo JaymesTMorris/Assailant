@@ -11,4 +11,8 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="7.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Skills\Weaken\" />
+  </ItemGroup>
+
 </Project>

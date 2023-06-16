@@ -37,6 +37,7 @@ namespace Shared
                 effect.Duration -= (int)delta;
                 if(effect.Duration<0)
                 {
+                    effect?.DropOffAction();
                     Activeffects.Remove(effect);
                 }
 
@@ -149,9 +150,10 @@ namespace Shared
             Activeffects.Add(effect);
         }
 
-        public void ApplyDamage(int damage, DamageTypes damageType)
+        public void ApplyDamage(int damage, DamageTypes damageType, double attackerAccuracy)
         {
-
+            double evasion = 0; //Do we even want evasion? If so need to add an attribute to track and calculate evasion with
+            double chanceToEvade = 1 - (attackerAccuracy * 1.25) / (attackerAccuracy + Math.Pow(evasion * .20, .9));
             
             if(damageType == DamageTypes.Physical)
             {
