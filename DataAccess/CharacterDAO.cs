@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
@@ -83,9 +84,6 @@ namespace DataAccess
                 
             }
             return retval;
-            //MySqlConnection connection = IDAO.GetConnection();
-            // MySqlConnection connection = new IDAO.GetConnection();
-            // Okay... now I know that I definitely do not understand interfaces.
         }
 
         private List<CharacterModel> ToList(DataTable dt)
@@ -110,7 +108,20 @@ namespace DataAccess
 
         public CharacterModel Save(CharacterModel model)
         {
-            throw new NotImplementedException();
+            if (model.PrimaryKey == 0)
+            {
+                string cmdText = $"INSERT INTO `character` (name, playerId, characterJSON) VALUES ('{model.Name}, {model.PlayerId}, {model.JSON}');";
+                using (DbCommand cmd = GetConnection().CreateCommand())
+                {
+                    cmd.CommandText = cmdText;
+                    cmd.ExecuteNonQuery();
+                    return model;
+                }
+            }
+            else
+            {
+                return Update(model);
+            }
         }
 
 
