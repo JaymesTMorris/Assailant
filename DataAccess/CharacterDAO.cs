@@ -148,13 +148,13 @@ namespace DataAccess
                 cmd.Parameters.Add(paramName);
 
                 DbParameter paramPlayerId = cmd.CreateParameter();
-                paramName.ParameterName = "@playerId";
-                paramName.Value = model.PlayerId;
+                paramPlayerId.ParameterName = "@playerId";
+                paramPlayerId.Value = model.PlayerId;
                 cmd.Parameters.Add(paramPlayerId);
 
                 DbParameter paramJSON = cmd.CreateParameter();
-                paramName.ParameterName = "@JSON";
-                paramName.Value = model.Name;
+                paramJSON.ParameterName = "@JSON";
+                paramJSON.Value = model.Name;
                 cmd.Parameters.Add(paramJSON);
 
                 cmd.Transaction = GetTransaction();
