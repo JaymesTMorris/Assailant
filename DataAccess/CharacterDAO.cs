@@ -108,15 +108,27 @@ namespace DataAccess
 
         public CharacterModel Save(CharacterModel model)
         {
+            if (model == null)
+            {
+                throw new Exception("Model provided was null");
+            }
             if (model.PrimaryKey == 0)
             {
-                string cmdText = $"INSERT INTO `character` (name, playerId, characterJSON) VALUES ('{model.Name}, {model.PlayerId}, {model.JSON}');";
+                CreateCharacter(model);
                 using (DbCommand cmd = GetConnection().CreateCommand())
                 {
-                    cmd.CommandText = cmdText;
-                    cmd.ExecuteNonQuery();
-                    return model;
+                    cmd.CommandText = "SELECT LAST_INSERT_ID();";
+                    cmd.Transaction = GetTransaction();
+                    using (DbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            long id = reader.GetInt64(0);
+                            model.CharacterId = (int)id;
+                        }
+                    }
                 }
+                return model;
             }
             else
             {
@@ -124,6 +136,31 @@ namespace DataAccess
             }
         }
 
+        private void CreateCharacter(CharacterModel model)
+        {
+            using (DbCommand cmd = GetConnection().CreateCommand())
+            {
+                cmd.CommandText = @"INSERT INTO `character` (name, playerId, characterJSON) VALUES ('@name, @playerId, @JSON');";
+
+                DbParameter paramName = cmd.CreateParameter();
+                paramName.ParameterName = "@name";
+                paramName.Value = model.Name;
+                cmd.Parameters.Add(paramName);
+
+                DbParameter paramPlayerId = cmd.CreateParameter();
+                paramName.ParameterName = "@playerId";
+                paramName.Value = model.PlayerId;
+                cmd.Parameters.Add(paramPlayerId);
+
+                DbParameter paramJSON = cmd.CreateParameter();
+                paramName.ParameterName = "@JSON";
+                paramName.Value = model.Name;
+                cmd.Parameters.Add(paramJSON);
+
+                cmd.Transaction = GetTransaction();
+                cmd.ExecuteNonQuery();
+            }
+        }
 
         public CharacterModel Update(CharacterModel model)
         {
