@@ -1,13 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using Serilog.Core;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shared
 {

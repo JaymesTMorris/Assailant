@@ -1,18 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Serilog" Version="2.12.0" />
+		<PackageReference Include="Serilog.Extensions.Logging" Version="7.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Serilog" Version="2.12.0" />
-    <PackageReference Include="Serilog.Extensions.Logging" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Skills\Weaken\" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<Folder Include="Skills\Weaken\" />
+	</ItemGroup>
 </Project>
