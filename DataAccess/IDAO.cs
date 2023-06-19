@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Reflection;
@@ -37,5 +38,4 @@ namespace Assailant.DataAccess
         void SetConnection(DbConnection conn, DbTransaction transaction = null);
         void SetTransaction(DbTransaction transaction = null);
     }
-}
 }

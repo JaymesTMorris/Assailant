@@ -54,7 +54,43 @@ namespace DataAccess
 
         public CharacterModel Create(CharacterModel model)
         {
-            throw new NotImplementedException();
+            using (DbCommand cmd = GetConnection().CreateCommand())
+            {
+                cmd.CommandText = @"INSERT INTO `character` (name, playerId, characterJSON) VALUES ('@name, @playerId, @JSON');";
+
+                DbParameter paramName = cmd.CreateParameter();
+                paramName.ParameterName = "@name";
+                paramName.Value = model.Name;
+                cmd.Parameters.Add(paramName);
+
+                DbParameter paramPlayerId = cmd.CreateParameter();
+                paramPlayerId.ParameterName = "@playerId";
+                paramPlayerId.Value = model.PlayerId;
+                cmd.Parameters.Add(paramPlayerId);
+
+                DbParameter paramJSON = cmd.CreateParameter();
+                paramJSON.ParameterName = "@JSON";
+                paramJSON.Value = model.Name;
+                cmd.Parameters.Add(paramJSON);
+
+                cmd.Transaction = GetTransaction();
+                cmd.ExecuteNonQuery();
+            }
+
+            using (DbCommand cmd = GetConnection().CreateCommand())
+            {
+                cmd.CommandText = "SELECT LAST_INSERT_ID();";
+                cmd.Transaction = GetTransaction();
+                using (DbDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        long id = reader.GetInt64(0);
+                        model.CharacterId = (int)id;
+                    }
+                }
+            }
+            return model;
         }
 
         public int? Delete(int id)
@@ -114,51 +150,11 @@ namespace DataAccess
             }
             if (model.PrimaryKey == 0)
             {
-                CreateCharacter(model);
-                using (DbCommand cmd = GetConnection().CreateCommand())
-                {
-                    cmd.CommandText = "SELECT LAST_INSERT_ID();";
-                    cmd.Transaction = GetTransaction();
-                    using (DbDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            long id = reader.GetInt64(0);
-                            model.CharacterId = (int)id;
-                        }
-                    }
-                }
-                return model;
+                  return Create(model);
             }
             else
             {
                 return Update(model);
-            }
-        }
-
-        private void CreateCharacter(CharacterModel model)
-        {
-            using (DbCommand cmd = GetConnection().CreateCommand())
-            {
-                cmd.CommandText = @"INSERT INTO `character` (name, playerId, characterJSON) VALUES ('@name, @playerId, @JSON');";
-
-                DbParameter paramName = cmd.CreateParameter();
-                paramName.ParameterName = "@name";
-                paramName.Value = model.Name;
-                cmd.Parameters.Add(paramName);
-
-                DbParameter paramPlayerId = cmd.CreateParameter();
-                paramPlayerId.ParameterName = "@playerId";
-                paramPlayerId.Value = model.PlayerId;
-                cmd.Parameters.Add(paramPlayerId);
-
-                DbParameter paramJSON = cmd.CreateParameter();
-                paramJSON.ParameterName = "@JSON";
-                paramJSON.Value = model.Name;
-                cmd.Parameters.Add(paramJSON);
-
-                cmd.Transaction = GetTransaction();
-                cmd.ExecuteNonQuery();
             }
         }
 
