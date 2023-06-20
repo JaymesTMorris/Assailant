@@ -52,7 +52,7 @@ namespace DataAccess
             return Transaction;
         }
 
-        public CharacterModel Create(CharacterModel model)
+        private CharacterModel Create(CharacterModel model)
         {
             using (DbCommand cmd = GetConnection().CreateCommand())
             {
@@ -70,7 +70,7 @@ namespace DataAccess
 
                 DbParameter paramJSON = cmd.CreateParameter();
                 paramJSON.ParameterName = "@JSON";
-                paramJSON.Value = model.Name;
+                paramJSON.Value = model.JSON;
                 cmd.Parameters.Add(paramJSON);
 
                 cmd.Transaction = GetTransaction();
@@ -160,7 +160,29 @@ namespace DataAccess
 
         public CharacterModel Update(CharacterModel model)
         {
-            throw new NotImplementedException();
+            using (DbCommand cmd = GetConnection().CreateCommand())
+            {
+                cmd.CommandText = @"UPDATE `character` SET name = '@name', characterJSON = '@JSON' WHERE characterId = @characterId);";
+
+                DbParameter paramName = cmd.CreateParameter();
+                paramName.ParameterName = "@name";
+                paramName.Value = model.Name;
+                cmd.Parameters.Add(paramName);
+
+                DbParameter paramJSON = cmd.CreateParameter();
+                paramJSON.ParameterName = "@JSON";
+                paramJSON.Value = model.JSON;
+                cmd.Parameters.Add(paramJSON);
+
+                DbParameter paramCharacterId = cmd.CreateParameter();
+                paramCharacterId.ParameterName = "@characterId";
+                paramCharacterId.Value = model.CharacterId;
+                cmd.Parameters.Add(paramCharacterId);
+
+                cmd.Transaction = GetTransaction();
+                cmd.ExecuteNonQuery();
+            }
+            return model;
         }
     }
 }
