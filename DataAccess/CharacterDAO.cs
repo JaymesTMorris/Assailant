@@ -52,7 +52,7 @@ namespace DataAccess
             return Transaction;
         }
 
-        private CharacterModel Create(CharacterModel model)
+        public CharacterModel Create(CharacterModel model)
         {
             using (DbCommand cmd = GetConnection().CreateCommand())
             {
