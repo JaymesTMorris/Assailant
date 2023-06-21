@@ -58,8 +58,52 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.2f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Shared\EquipmentSlot.cs" />
+    <Compile Include="Assets\Shared\Skills\HealOverTime.cs" />
+    <Compile Include="Assets\Shared\Skills\QuickHeal\QuickHeal.cs" />
+    <Compile Include="Assets\Shared\EquipmentSet.cs" />
+    <Compile Include="Assets\Shared\Attributes\Attributes.cs" />
+    <Compile Include="Assets\Shared\Character.cs" />
+    <Compile Include="Assets\Shared\Attributes\PhysicalArmorAttribute.cs" />
+    <Compile Include="Assets\Shared\Skills\Vulnerability\Vulnerable.cs" />
+    <Compile Include="Assets\Shared\Skills\Fireball\FireballEffect.cs" />
+    <Compile Include="Assets\Shared\SkillLoadout.cs" />
+    <Compile Include="Assets\Shared\Attributes\MagicArmorAttribute.cs" />
+    <Compile Include="Assets\Shared\EquipmentTypes.cs" />
+    <Compile Include="Assets\Shared\Combatant.cs" />
+    <Compile Include="Assets\Shared\Skills\Fireball\Fireball.cs" />
+    <Compile Include="Assets\Shared\Attributes\HPRegenAttribute.cs" />
+    <Compile Include="Assets\Shared\Skills\BowBasicAttack\BowBasicAttack.cs" />
+    <Compile Include="Assets\Shared\Equipment.cs" />
+    <Compile Include="Assets\Shared\Attributes\BaseAttribute.cs" />
+    <Compile Include="Assets\Shared\Attributes\AttackPowerAttribute.cs" />
+    <Compile Include="Assets\Shared\Attributes\SeconadaryAttribute.cs" />
+    <Compile Include="Assets\Shared\Weapon.cs" />
+    <Compile Include="Assets\Shared\Attributes\HealthPoolAttribute.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Shared\CombatState.cs" />
     <Compile Include="Assets\Test.cs" />
+    <Compile Include="Assets\Shared\CombatSystem.cs" />
+    <Compile Include="Assets\Shared\Skills\Vulnerability\Vulnerability.cs" />
+    <Compile Include="Assets\Shared\Skills\BasicAttackEffect.cs" />
+    <Compile Include="Assets\Shared\Attributes\ManaPoolAttribute.cs" />
+    <Compile Include="Assets\Shared\SkillEffect.cs" />
+    <Compile Include="Assets\Shared\SkillType.cs" />
+    <Compile Include="Assets\Shared\Player.cs" />
+    <Compile Include="Assets\Shared\Skills\SwordBasicAttack\SwordBasicAttack.cs" />
+    <Compile Include="Assets\Shared\Skills\HealEffect.cs" />
+    <Compile Include="Assets\Shared\DamageTypes.cs" />
+    <Compile Include="Assets\Shared\Skill.cs" />
+    <Compile Include="Assets\Shared\WeaponTypes.cs" />
+    <Compile Include="Assets\Shared\Skills\Rejuvenation\Rejuvenation.cs" />
+    <Compile Include="Assets\Shared\Attributes\SpellPowerAttribute.cs" />
+    <Compile Include="Assets\Shared\Skills\GreaterHeal\GreaterHeal.cs" />
+    <Compile Include="Assets\Shared\Attributes\Attribute.cs" />
+    <Compile Include="Assets\Shared\Attributes\AttributeType.cs" />
+    <Compile Include="Assets\Shared\Attributes\MPRegenAttribute.cs" />
+    <Compile Include="Assets\Shared\Skills\StaffBasicAttack\StaffBasicAttack.cs" />
+    <Compile Include="Assets\Shared\Skills\Fireball\BurningEffect.cs" />
+    <Compile Include="Assets\Shared\Skills\Rejuvenation\RejuvenationEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
