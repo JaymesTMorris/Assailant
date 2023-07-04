@@ -1,20 +1,20 @@
-﻿using System.Collections;
+﻿using Shared.Attributes;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
 
-	public int maxHealth = 100;
-	public int currentHealth;
-
-	public HealthBar healthBar;
+	public Attributes attributes = new Attributes(hp:100,con:9,mp:1000,wis:0,intel:0);
+    public ManaBar manaBar;
+    public HealthBar healthBar;
 
     // Start is called before the first frame update
     void Start()
-    {
-		currentHealth = maxHealth;
-		healthBar.SetMaxHealth(maxHealth);
+    {	
+		manaBar.SetMaxMana(attributes.MaxMP.FinalValue);
+        healthBar.SetMaxHealth(attributes.MaxHP.FinalValue);
     }
 
     // Update is called once per frame
@@ -22,14 +22,17 @@ public class Player : MonoBehaviour
     {
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			TakeDamage(20);
+			TakeDamage(50);
 		}
     }
 
 	void TakeDamage(int damage)
 	{
-		currentHealth -= damage;
+		attributes.RemainingHP -= damage;
 
-		healthBar.SetHealth(currentHealth);
-	}
+        healthBar.SetHealth(attributes.RemainingHP);
+        attributes.RemainingMP -= damage;
+
+        manaBar.SetMana(attributes.RemainingMP);
+    }
 }
