@@ -9,7 +9,7 @@ namespace Shared.Skills.Rejuvenation
 {
     public class RejuvenationEffect : HealEffect
     {
-        public override void Action(Combatant caster, Combatant opponent)
+        public override void Action(ICombatant caster, ICombatant opponent)
         {
             base.Action(caster, opponent);
             opponent.ApplyEffect(new HealEffect());

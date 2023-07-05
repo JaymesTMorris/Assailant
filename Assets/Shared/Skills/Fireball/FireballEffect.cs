@@ -15,7 +15,7 @@ namespace Shared.Skills.Fireball
             DamageType = DamageTypes.Magic;
         }
 
-        public override void Action(Combatant caster, Combatant opponent)
+        public override void Action(ICombatant caster, ICombatant opponent)
         {
             int damage = new Random().Next(MinDamage,MaxDamage);
             opponent.ApplyDamage(caster.CalcDmgToDeal(damage, DamageType), DamageType);

@@ -8,7 +8,7 @@ namespace Shared.Skills
 {
     public class BasicAttackEffect : SkillEffect
     {
-        public override void Action(Combatant caster, Combatant opponent)
+        public override void Action(ICombatant caster, ICombatant opponent)
         {
             MinDamage = caster.EquipedItems.Weapon.MinDamage;
             MaxDamage = caster.EquipedItems.Weapon.MaxDamage;

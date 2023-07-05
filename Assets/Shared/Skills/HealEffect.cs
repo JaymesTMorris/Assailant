@@ -22,7 +22,7 @@ namespace Shared.Skills
             Blockable= false;
             Parriable= false;
         }
-        public override void Action(Combatant caster, Combatant opponent)
+        public override void Action(ICombatant caster, ICombatant opponent)
         {
             int damage = new Random().Next(MinDamage, MaxDamage);
             var multiplier = caster.Stats.SpellPower.FinalValue / (double)250;

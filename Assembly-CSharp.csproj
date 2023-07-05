@@ -83,6 +83,7 @@
     <Compile Include="Assets\Shared\Equipment.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Shared\Attributes\Attributes.cs" />
+    <Compile Include="Assets\Shared\ICharacter.cs" />
     <Compile Include="Assets\Shared\Skills\StaffBasicAttack\StaffBasicAttack.cs" />
     <Compile Include="Assets\Shared\Skills\BasicAttackEffect.cs" />
     <Compile Include="Assets\Shared\Attributes\HealthPoolAttribute.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Assets\Shared\Attributes\MagicArmorAttribute.cs" />
     <Compile Include="Assets\Shared\Skills\Vulnerability\Vulnerable.cs" />
     <Compile Include="Assets\Shared\Attributes\AttackPowerAttribute.cs" />
+    <Compile Include="Assets\Shared\ICombatant.cs" />
     <Compile Include="Assets\Shared\Attributes\ManaPoolAttribute.cs" />
     <Compile Include="Assets\Shared\EquipmentTypes.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />

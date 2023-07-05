@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Assailant_Service_Server\Assailant_Service_Server.csproj" />
-    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>

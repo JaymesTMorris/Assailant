@@ -1,6 +1,6 @@
 ﻿namespace Shared
 {
-    public class Character  
+    public class Character : ICharacter
     {
         public Attributes.Attributes Stats { get; set; }
         public SkillLoadout Skills { get; set; }

@@ -18,7 +18,7 @@ namespace Shared
         public double?  Freqency { get; set; }
         public double? LastTrigger { get; set; }
         public DamageTypes DamageType { get; set; } = DamageTypes.Physical;
-        public virtual void Action(Combatant caster, Combatant opponent)
+        public virtual void Action(ICombatant caster, ICombatant opponent)
         {
             int damage = new Random().Next(MinDamage, MaxDamage);
             opponent.ApplyDamage(caster.CalcDmgToDeal(damage, DamageType), DamageType, 100);
