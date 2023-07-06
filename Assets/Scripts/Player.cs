@@ -2,94 +2,221 @@
 using Shared.Attributes;
 using Shared.Skills.BowBasicAttack;
 using Shared.Skills.Fireball;
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using System.Xml.Schema;
 using UnityEngine;
 
 public class Player : MonoBehaviour, ICombatant
 {
-    private Combatant combatant;
-    public Player oppsingPlayer { get { return (Player)combatant.Opponent; } set { combatant.Opponent = value; } }
+
+    public Player oppsingPlayer;
     public ManaBar manaBar;
     public HealthBar healthBar;
- 
 
-    public List<SkillEffect> Activeffects => combatant.Activeffects;
-
-
-    public double CastTimeRemaining { get => combatant.CastTimeRemaining; set => combatant.CastTimeRemaining = value; }
-    public ICombatant Opponent { get => combatant.Opponent; set => combatant.Opponent = value; }
-    public double RecoveryTimeRemaining { get => combatant.RecoveryTimeRemaining; set => combatant.RecoveryTimeRemaining = value;  }
-    public Skill SkillBeingCasted { get => combatant.SkillBeingCasted; set => combatant.SkillBeingCasted = value; }
-    public CombatState State { get => combatant.State; set => combatant.State = value; }
-    public EquipmentSet EquipedItems { get => combatant.EquipedItems; set => combatant.EquipedItems = value; }
-    public int Experience { get => combatant.Experience; set => combatant.Experience = value; }
-    public int Level { get => combatant.Level; set => combatant.Level = value; }
-    public string Name { get => combatant.Name; set => combatant.Name = value; }
-    public int Rank { get => combatant.Rank; set => combatant.Rank = value; }
-    public int Score { get => combatant.Score; set => combatant.Score = value; }
-    public SkillLoadout Skills { get => combatant.Skills; set => combatant.Skills = value; }
-    public Attributes Stats { get => combatant.Stats; set => combatant.Stats = value; }
-
-    public Player()
+    public ICombatant Opponent
     {
-
-        
+        get
+        {
+            return oppsingPlayer;
+        }
+        set
+        {
+            if (value is Player)
+            {
+                oppsingPlayer = (Player)value;
+            }
+        }
     }
-    // Start is called before the first frame update
+    public double RecoveryTimeRemaining { get; set; } = 0;
+    public double CastTimeRemaining { get; set; } = 0;
+    public CombatState State { get; set; }
+    public Skill? SkillBeingCasted { get; set; }
+
+    public List<SkillEffect> Activeffects { get; private set; } = new List<SkillEffect>();
+    public Attributes Stats { get; set; }
+    public SkillLoadout Skills { get; set; }
+    public EquipmentSet EquipedItems { get; set; }
+    public int Score { get; set; }
+    public int Experience { get; set; }
+    public int Level { get; set; }
+    public int Rank { get; set; }
+    public string Name { get; set; }
+
     void Start()
     {
-        combatant = new Combatant()
-        {
-            Name = "A",
-            Skills = new SkillLoadout() { SlotThree = new Fireball(), SlotTwo = new StaffBasicAttack(), SlotOne = new QuickHeal() },
-            EquipedItems = new EquipmentSet() { Weapon = new Weapon() { DamageType = DamageTypes.Magic, MinDamage = 240, MaxDamage = 260 } },
-            Stats = new Attributes(hp: 100, con: 9, mp: 1000, wis: 0, intel: 0),
-            Opponent = oppsingPlayer
-        };
-        manaBar.SetMaxMana(combatant.Stats.MaxMP.FinalValue);
-        healthBar.SetMaxHealth(combatant.Stats.MaxHP.FinalValue);
-
+        Name = "A";
+        Skills = new SkillLoadout() { SlotThree = new Fireball(), SlotTwo = new StaffBasicAttack(), SlotOne = new QuickHeal() };
+        EquipedItems = new EquipmentSet() { Weapon = new Weapon() { DamageType = DamageTypes.Magic, MinDamage = 240, MaxDamage = 260 } };
+        Stats = new Attributes(hp: 100, con: 9, mp: 1000, wis: 0, intel: 0);
+        manaBar.SetMaxMana(Stats.MaxMP.FinalValue);
+        healthBar.SetMaxHealth(Stats.MaxHP.FinalValue);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        combatant.Update(Time.deltaTime);
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			TakeDamage(50);
-		}
+        Update(Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeDamage(50);
+        }
     }
 
-	void TakeDamage(int damage)
-	{
-		combatant.Stats.RemainingHP -= damage;
-
-        healthBar.SetHealth(combatant.Stats.RemainingHP);
-        combatant.Stats.RemainingMP -= damage;
-
-        manaBar.SetMana(combatant.Stats.RemainingMP);
-    }
-
-    public void ApplyDamage(int damage, DamageTypes damageType, double attackerAccuracy = 100)
+    void TakeDamage(int damage)
     {
-        combatant.ApplyDamage(damage, damageType, attackerAccuracy);
-    }
+        Stats.RemainingHP -= damage;
 
-    public void ApplyEffect(SkillEffect effect)
-    {
-        combatant.ApplyEffect(effect);
-    }
+        healthBar.SetHealth(Stats.RemainingHP);
+        Stats.RemainingMP -= damage;
 
-    public int CalcDmgToDeal(int damage, DamageTypes damageType)
-    {
-        return combatant.CalcDmgToDeal(damage,damageType);
+        manaBar.SetMana(Stats.RemainingMP);
     }
 
     public void Update(double delta)
     {
-        combatant.Update(delta);
+        ReduceCooldowns(delta);
+        UpdateCombatState(delta);
+        ProcessActiveEffects(delta);
+        Regen(delta);
     }
+
+    private void ProcessActiveEffects(double delta)
+    {
+        foreach (var effect in Activeffects)
+        {
+            effect.LastTrigger += (int)delta;
+            effect.Duration -= (int)delta;
+            if (effect.Duration < 0)
+            {
+                effect?.DropOffAction();
+                Activeffects.Remove(effect);
+            }
+
+            if (effect.LastTrigger >= effect.Freqency)
+            {
+                effect.Action(this, Opponent);
+                effect.LastTrigger = 0;
+            }
+        }
+    }
+
+    private void Regen(double delta)
+    {
+        Stats.RemainingHP += Stats.HPRegen.FinalValue;
+        if (Stats.RemainingHP > Stats.MaxHP.FinalValue)
+        {
+            Stats.RemainingHP = Stats.MaxHP.FinalValue;
+        }
+
+        Stats.RemainingMP += Stats.MPRegen.FinalValue;
+        if (Stats.RemainingMP > Stats.MaxMP.FinalValue)
+        {
+            Stats.RemainingMP = Stats.MaxMP.FinalValue;
+        }
+    }
+
+    private void UpdateCombatState(double delta)
+    {
+        if (State == CombatState.Recovering)
+        {
+            RecoveryTimeRemaining -= delta;
+            if (RecoveryTimeRemaining < 0)
+            {
+                RecoveryTimeRemaining = 0;
+                State = CombatState.None;
+            }
+        }
+        else if (State == CombatState.Casting)
+        {
+            CastTimeRemaining -= delta;
+            if (CastTimeRemaining < 0)
+            {
+                ExecuteSkill(SkillBeingCasted);
+            }
+        }
+        else
+        {
+            foreach (var skill in Skills.SkillList)
+            {
+                if (skill.RemainingCooldown == 0 && Stats.RemainingMP >= skill.Cost)
+                {
+                    Cast(skill);
+                    break;
+                }
+            }
+            if (State != CombatState.Casting)
+            {
+                //Cast(EquipedItems.Weapon.BasicAttack);
+            }
+        }
+    }
+
+    private void Cast(Skill skill)
+    {
+        State = CombatState.Casting;
+        Stats.RemainingMP -= skill.Cost;
+        CastTimeRemaining = skill.CastTime;
+        SkillBeingCasted = skill;
+    }
+
+    private void ReduceCooldowns(double delta)
+    {
+        foreach (var skill in Skills.SkillList)
+        {
+            skill.RemainingCooldown -= delta;
+            if (skill.RemainingCooldown < 0)
+            {
+                skill.RemainingCooldown = 0;
+            }
+        }
+    }
+
+    private void ExecuteSkill(Skill skill)
+    {
+        skill.Effect.Action(this, Opponent);
+        SkillBeingCasted = null;
+        State = CombatState.Recovering;
+        RecoveryTimeRemaining = skill.RecoveryTime;
+        skill.RemainingCooldown = skill.Cooldown;
+    }
+
+    public int CalcDmgToDeal(int damage, DamageTypes damageType)
+    {
+        double multiplier = 1;
+        if (DamageTypes.Magic == damageType)
+        {
+            multiplier = Stats.SpellPower.FinalValue / (double)250;
+        }
+        else if (damageType == DamageTypes.Physical)
+        {
+            multiplier = Stats.AttackPower.FinalValue / (double)250;
+        }
+        return (int)(damage * multiplier);
+    }
+
+    public void ApplyEffect(SkillEffect effect)
+    {
+        Activeffects.Add(effect);
+    }
+
+    public void ApplyDamage(int damage, DamageTypes damageType, double attackerAccuracy = 100)
+    {
+        double evasion = 0; //Do we even want evasion? If so need to add an attribute to track and calculate evasion with
+        double chanceToEvade = 1 - (attackerAccuracy * 1.25) / (attackerAccuracy + Math.Pow(evasion * .20, .9));
+
+        if (damageType == DamageTypes.Physical)
+        {
+            damage = (int)((10 * damage * damage) / (double)Stats.PhysicalArmor.FinalValue + 10 * damage);
+        }
+        else if (DamageTypes.Magic == damageType)
+        {
+            damage = (int)((10 * damage * damage) / (double)Stats.MagicArmor.FinalValue + 10 * damage);
+        }
+
+        Stats.RemainingHP -= damage;
+        if (Stats.RemainingHP < 0)
+        {
+            Stats.RemainingHP = 0;
+        }
+    }
+
 }
