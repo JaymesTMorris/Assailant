@@ -79,7 +79,7 @@ public class Player : MonoBehaviour, ICombatant
         ReduceCooldowns(delta);
         UpdateCombatState(delta);
         ProcessActiveEffects(delta);
-       // Regen(delta);
+       // Regen(delta)
     }
 
     private void ProcessActiveEffects(double delta)
