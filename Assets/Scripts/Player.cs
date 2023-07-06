@@ -45,30 +45,33 @@ public class Player : MonoBehaviour, ICombatant
     void Start()
     {
         Name = "A";
-        Skills = new SkillLoadout() { SlotThree = new Fireball(), SlotTwo = new StaffBasicAttack(), SlotOne = new QuickHeal() };
+        Skills = new SkillLoadout() { SlotThree = new Fireball(), SlotTwo = new StaffBasicAttack(), SlotOne = new Fireball() };
         EquipedItems = new EquipmentSet() { Weapon = new Weapon() { DamageType = DamageTypes.Magic, MinDamage = 240, MaxDamage = 260 } };
-        Stats = new Attributes(hp: 100, con: 9, mp: 1000, wis: 0, intel: 0);
+        Stats = new Attributes(hp: 100, con: 100, mp: 1000, wis: 0, intel: 0);
         manaBar.SetMaxMana(Stats.MaxMP.FinalValue);
         healthBar.SetMaxHealth(Stats.MaxHP.FinalValue);
     }
 
     void Update()
     {
+
         Update(Time.deltaTime);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(50);
         }
+        healthBar.SetHealth(Stats.RemainingHP);
+        manaBar.SetMana(Stats.RemainingMP);
     }
 
     void TakeDamage(int damage)
     {
         Stats.RemainingHP -= damage;
 
-        healthBar.SetHealth(Stats.RemainingHP);
+
         Stats.RemainingMP -= damage;
 
-        manaBar.SetMana(Stats.RemainingMP);
+
     }
 
     public void Update(double delta)
@@ -76,7 +79,7 @@ public class Player : MonoBehaviour, ICombatant
         ReduceCooldowns(delta);
         UpdateCombatState(delta);
         ProcessActiveEffects(delta);
-        Regen(delta);
+       // Regen(delta);
     }
 
     private void ProcessActiveEffects(double delta)

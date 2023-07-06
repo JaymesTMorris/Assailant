@@ -82,8 +82,8 @@
     <Compile Include="Assets\Shared\Attributes\MPRegenAttribute.cs" />
     <Compile Include="Assets\Shared\Equipment.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
-    <Compile Include="Assets\Shared\Attributes\Attributes.cs" />
     <Compile Include="Assets\Shared\ICharacter.cs" />
+    <Compile Include="Assets\Shared\Attributes\Attributes.cs" />
     <Compile Include="Assets\Shared\Skills\StaffBasicAttack\StaffBasicAttack.cs" />
     <Compile Include="Assets\Shared\Skills\BasicAttackEffect.cs" />
     <Compile Include="Assets\Shared\Attributes\HealthPoolAttribute.cs" />
