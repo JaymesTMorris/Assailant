@@ -14,6 +14,6 @@ namespace Shared
         void ApplyDamage(int damage, DamageTypes damageType, double attackerAccuracy = 100);
         void ApplyEffect(SkillEffect effect);
         int CalcDmgToDeal(int damage, DamageTypes damageType);
-        void Update(double delta);
+        void update(double delta);
     }
 }

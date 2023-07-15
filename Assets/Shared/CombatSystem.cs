@@ -22,8 +22,8 @@ namespace Shared
         public bool Update(double delta)
         {
 
-            CombatantOne.Update(delta);
-            CombatantTwo.Update(delta);
+            CombatantOne.update(delta);
+            CombatantTwo.update(delta);
 
             var stillFighting= CombatantOne.Stats.RemainingHP > 0 && CombatantTwo.Stats.RemainingHP > 0;
 

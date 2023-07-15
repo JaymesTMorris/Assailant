@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static UnityEngine.ParticleSystem;
 
 namespace Shared.Skills.BowBasicAttack
 {
@@ -19,6 +20,7 @@ namespace Shared.Skills.BowBasicAttack
             Cost = 100;
             Name = "Quick Heal";
             Effect = new HealEffect(90, 110);
+            ParticleEffect = "heal";
         }
     }
 }

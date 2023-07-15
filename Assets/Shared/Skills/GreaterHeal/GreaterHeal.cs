@@ -18,6 +18,7 @@ namespace Shared.Skills.GreaterHeal
             Cost = 200;
             Name = "Greater Heal";
             Effect = new HealEffect(115,135);
+            //ParticleEffect =;
         }
     }
 }

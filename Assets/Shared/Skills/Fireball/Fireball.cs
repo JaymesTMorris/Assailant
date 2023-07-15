@@ -18,6 +18,7 @@ namespace Shared.Skills.Fireball
             Cost = 200;
             Name = "Fireball";
             Effect = new FireballEffect();
+            //ParticleEffect = 
         }
     }
 }

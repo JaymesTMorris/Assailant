@@ -12,7 +12,7 @@ namespace Shared
         public Skill? SkillBeingCasted { get; set; }
 
         public List<SkillEffect> Activeffects { get; private set; } = new List<SkillEffect>();
-        public void Update(double delta)
+        public void update(double delta)
         {
             ReduceCooldowns(delta);
             UpdateCombatState(delta);

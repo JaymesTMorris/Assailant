@@ -8,7 +8,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, ICombatant
 {
-
+    public Player player1;
+    public Player player2;
     public Player oppsingPlayer;
     public ManaBar manaBar;
     public HealthBar healthBar;
@@ -45,17 +46,17 @@ public class Player : MonoBehaviour, ICombatant
     void Start()
     {
         Name = "A";
-        Skills = new SkillLoadout() { SlotThree = new Fireball(), SlotTwo = new StaffBasicAttack(), SlotOne = new Fireball() };
+        Skills = new SkillLoadout() { SlotThree = new Fireball(), SlotTwo = new StaffBasicAttack(), SlotOne = new QuickHeal() };
         EquipedItems = new EquipmentSet() { Weapon = new Weapon() { DamageType = DamageTypes.Magic, MinDamage = 240, MaxDamage = 260 } };
         Stats = new Attributes(hp: 100, con: 100, mp: 1000, wis: 0, intel: 0);
         manaBar.SetMaxMana(Stats.MaxMP.FinalValue);
         healthBar.SetMaxHealth(Stats.MaxHP.FinalValue);
     }
 
-    void Update()
+    void FixedUpdate()
     {
 
-        Update(Time.deltaTime);
+        update(Time.deltaTime);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(50);
@@ -74,7 +75,7 @@ public class Player : MonoBehaviour, ICombatant
 
     }
 
-    public void Update(double delta)
+    public void update(double delta)
     {
         ReduceCooldowns(delta);
         UpdateCombatState(delta);
@@ -176,6 +177,11 @@ public class Player : MonoBehaviour, ICombatant
     private void ExecuteSkill(Skill skill)
     {
         skill.Effect.Action(this, Opponent);
+        //create instance of effect prefab 
+        if (skill.ParticleEffect != null){
+            GameObject instance = Instantiate(Resources.Load(skill.ParticleEffect, typeof(GameObject)), gameObject.transform.position, gameObject.transform.rotation) as GameObject;
+            instance.GetComponent<ParticleSystem>().GetPlaybackState().;
+        }
         SkillBeingCasted = null;
         State = CombatState.Recovering;
         RecoveryTimeRemaining = skill.RecoveryTime;

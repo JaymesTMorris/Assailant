@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Shared
 {
@@ -18,6 +19,6 @@ namespace Shared
         public WeaponTypes WeaponsUsability { get; set; }
         public double RemainingCooldown { get; set; }
         public int Cost { get; set; }
-
+        public string ParticleEffect { get; set; }
     }
 }
