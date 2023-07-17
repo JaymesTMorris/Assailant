@@ -180,7 +180,7 @@ public class Player : MonoBehaviour, ICombatant
         //create instance of effect prefab 
         if (skill.ParticleEffect != null){
             GameObject instance = Instantiate(Resources.Load(skill.ParticleEffect, typeof(GameObject)), gameObject.transform.position, gameObject.transform.rotation) as GameObject;
-            instance.GetComponent<ParticleSystem>().GetPlaybackState().;
+            Destroy(instance, skill.ParticleExpirationTime);
         }
         SkillBeingCasted = null;
         State = CombatState.Recovering;

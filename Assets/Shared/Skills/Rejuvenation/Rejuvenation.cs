@@ -18,7 +18,7 @@ namespace Shared.Skills.Rejuvenation
             Cost = 100;
             Name = "Rejuvenation";
             Effect = new RejuvenationEffect();
-            //ParticleEffect = ;
+            ParticleEffect = "Rejuvenation";
         }
     }
 }

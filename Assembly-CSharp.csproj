@@ -84,9 +84,9 @@
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Shared\EquipmentSet.cs" />
     <Compile Include="Assets\Shared\Weapon.cs" />
+    <Compile Include="Assets\Scripts\abilities\FireBall.cs" />
     <Compile Include="Assets\Shared\Skills\Rejuvenation\Rejuvenation.cs" />
     <Compile Include="Assets\Shared\Attributes\MPRegenAttribute.cs" />
-    <Compile Include="Assets\Scripts\abilities\FireBall.cs" />
     <Compile Include="Assets\Shared\Equipment.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\PyroParticles\Demo\DemoScriptEditor.cs" />

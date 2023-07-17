@@ -20,5 +20,6 @@ namespace Shared
         public double RemainingCooldown { get; set; }
         public int Cost { get; set; }
         public string ParticleEffect { get; set; }
+        public float ParticleExpirationTime { get; set; }
     }
 }
