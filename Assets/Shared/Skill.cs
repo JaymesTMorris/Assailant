@@ -21,5 +21,6 @@ namespace Shared
         public int Cost { get; set; }
         public string ParticleEffect { get; set; }
         public float ParticleExpirationTime { get; set; }
+        public string Animation { get; set; }
     }
 }

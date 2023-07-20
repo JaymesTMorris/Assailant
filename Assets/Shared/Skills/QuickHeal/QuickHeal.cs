@@ -22,7 +22,8 @@ namespace Shared.Skills.BowBasicAttack
             Name = "Quick Heal";
             Effect = new HealEffect(90, 110);
             ParticleEffect = "heal";
-            ParticleExpirationTime = 1;
+            ParticleExpirationTime = 3;
+            Animation = "Attack1";
         }
     }
 }
