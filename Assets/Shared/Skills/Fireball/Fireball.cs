@@ -19,7 +19,7 @@ namespace Shared.Skills.Fireball
             Name = "Fireball";
             Effect = new FireballEffect();
             //ParticleEffect = 
-            Animation = "Attack1";
+            Animation = "Attack02Maintain";
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Shared.Skills.BowBasicAttack
             Effect = new HealEffect(90, 110);
             ParticleEffect = "heal";
             ParticleExpirationTime = 3;
-            Animation = "Attack1";
+            Animation = "Attack03Maintain";
         }
     }
 }

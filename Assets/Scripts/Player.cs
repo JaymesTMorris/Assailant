@@ -189,6 +189,7 @@ namespace UnityScripts
             if (skill.Animation != null)
             {
                 gameObject.GetComponent<Animator>().Play(skill.Animation);
+
             }
             SkillBeingCasted = null;
             State = CombatState.Recovering;

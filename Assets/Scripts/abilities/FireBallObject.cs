@@ -14,6 +14,7 @@ public class FireBallObject : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         speed = 100.0f;
+
     }
 
     // Update is called once per frame
@@ -26,7 +27,7 @@ public class FireBallObject : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            
+            Destroy(gameObject);
         }
     }
 }

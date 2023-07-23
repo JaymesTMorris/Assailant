@@ -19,6 +19,7 @@ namespace Shared.Skills.BowBasicAttack
             Cost = 50;
             Name = "Basic Staff Attack";
             Effect = new BasicAttackEffect();
+            Animation = "Attack04";
         }
     }
 }
