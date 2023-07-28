@@ -18,7 +18,7 @@ namespace DataAccess
         DbTransaction Transaction;
 
         public string PrimaryKeyColumn { get;  set; } = "characterId";
-        public string TableName { get;  set; } = "character";
+        public string TableName { get;  set; } = "`character`";
 
         //public CharacterDAO(string tableName, string primaryKeyColumn)
         //: this()
@@ -58,7 +58,7 @@ namespace DataAccess
             {
                 using (DbCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = @"INSERT INTO `character` (name, playerId, characterJSON) VALUES ('@name, @playerId, @JSON');";
+                    command.CommandText = $@"INSERT INTO {TableName} (name, playerId, characterJSON) VALUES ('@name, @playerId, @JSON');";
 
                     DbParameter paramName = command.CreateParameter();
                     paramName.ParameterName = "@name";
@@ -104,7 +104,7 @@ namespace DataAccess
             {
                 using (DbCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = "DELETE FROM `character` WHERE characterId = @id";
+                    command.CommandText = $"DELETE FROM {TableName} WHERE characterId = @id";
 
                     DbParameter idParam = command.CreateParameter();
                     idParam.ParameterName = "@id";
