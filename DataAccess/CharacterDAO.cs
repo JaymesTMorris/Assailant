@@ -54,39 +54,42 @@ namespace DataAccess
 
         public CharacterModel Create(CharacterModel model)
         {
-            using (DbCommand cmd = GetConnection().CreateCommand())
+            using (DbConnection connection = GetConnection())
             {
-                cmd.CommandText = @"INSERT INTO `character` (name, playerId, characterJSON) VALUES ('@name, @playerId, @JSON');";
-
-                DbParameter paramName = cmd.CreateParameter();
-                paramName.ParameterName = "@name";
-                paramName.Value = model.Name;
-                cmd.Parameters.Add(paramName);
-
-                DbParameter paramPlayerId = cmd.CreateParameter();
-                paramPlayerId.ParameterName = "@playerId";
-                paramPlayerId.Value = model.PlayerId;
-                cmd.Parameters.Add(paramPlayerId);
-
-                DbParameter paramJSON = cmd.CreateParameter();
-                paramJSON.ParameterName = "@JSON";
-                paramJSON.Value = model.JSON;
-                cmd.Parameters.Add(paramJSON);
-
-                cmd.Transaction = GetTransaction();
-                cmd.ExecuteNonQuery();
-            }
-
-            using (DbCommand cmd = GetConnection().CreateCommand())
-            {
-                cmd.CommandText = "SELECT LAST_INSERT_ID();";
-                cmd.Transaction = GetTransaction();
-                using (DbDataReader reader = cmd.ExecuteReader())
+                using (DbCommand command = connection.CreateCommand())
                 {
-                    if (reader.Read())
+                    command.CommandText = @"INSERT INTO `character` (name, playerId, characterJSON) VALUES ('@name, @playerId, @JSON');";
+
+                    DbParameter paramName = command.CreateParameter();
+                    paramName.ParameterName = "@name";
+                    paramName.Value = model.Name;
+                    command.Parameters.Add(paramName);
+
+                    DbParameter paramPlayerId = command.CreateParameter();
+                    paramPlayerId.ParameterName = "@playerId";
+                    paramPlayerId.Value = model.PlayerId;
+                    command.Parameters.Add(paramPlayerId);
+
+                    DbParameter paramJSON = command.CreateParameter();
+                    paramJSON.ParameterName = "@JSON";
+                    paramJSON.Value = model.JSON;
+                    command.Parameters.Add(paramJSON);
+
+                    command.Transaction = GetTransaction();
+                    command.ExecuteNonQuery();
+                }
+
+                using (DbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT LAST_INSERT_ID();";
+                    command.Transaction = GetTransaction();
+                    using (DbDataReader reader = command.ExecuteReader())
                     {
-                        long id = reader.GetInt64(0);
-                        model.CharacterId = (int)id;
+                        if (reader.Read())
+                        {
+                            long id = reader.GetInt64(0);
+                            model.CharacterId = (int)id;
+                        }
                     }
                 }
             }
@@ -95,12 +98,30 @@ namespace DataAccess
 
         public int? Delete(int id)
         {
-            throw new NotImplementedException();
+            int rowsDeleted = 0;
+
+            using (DbConnection connection = GetConnection())
+            {
+                using (DbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "DELETE FROM `character` WHERE characterId = @id";
+
+                    DbParameter idParam = command.CreateParameter();
+                    idParam.ParameterName = "@id";
+                    idParam.DbType = DbType.Int32;
+                    idParam.Value = id;
+                    command.Parameters.Add(idParam);
+
+                    rowsDeleted = command.ExecuteNonQuery();
+                }
+            }
+
+            return rowsDeleted;
         }
 
         public int? Delete(CharacterModel model)
         {
-            throw new NotImplementedException();
+            return Delete(model.CharacterId);
         }
 
         public List<CharacterModel> FindAll(string where)
