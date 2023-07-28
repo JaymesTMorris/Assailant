@@ -56,9 +56,10 @@ namespace DataAccess
         {
             using (DbConnection connection = GetConnection())
             {
+                connection.Open();
                 using (DbCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = $@"INSERT INTO {TableName} (name, playerId, characterJSON) VALUES ('@name, @playerId, @JSON');";
+                    command.CommandText = $@"INSERT INTO {TableName} (name, playerId, characterJSON) VALUES (@name, @playerId, @JSON);";
 
                     DbParameter paramName = command.CreateParameter();
                     paramName.ParameterName = "@name";

@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{F0AEC283-F8E9-82F7-2CE3-1BD6E1E5DF24}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{3441B077-CBF2-605D-D513-549F71F904BA}"
@@ -14,6 +16,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{0C22CDDA-BC46-4CF6-A3E3-7FE1BBCA136C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{F5C3746C-818B-4AEA-B734-CA7F7F7B93AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessUnitTest", "DataAccessUnitTest\DataAccessUnitTest.csproj", "{829899EE-3A16-446E-B090-EFDF8FE96CD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,8 +53,15 @@ Global
 		{F5C3746C-818B-4AEA-B734-CA7F7F7B93AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5C3746C-818B-4AEA-B734-CA7F7F7B93AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5C3746C-818B-4AEA-B734-CA7F7F7B93AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{829899EE-3A16-446E-B090-EFDF8FE96CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{829899EE-3A16-446E-B090-EFDF8FE96CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{829899EE-3A16-446E-B090-EFDF8FE96CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{829899EE-3A16-446E-B090-EFDF8FE96CD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {87650EF6-F3F2-4808-ACB1-20D6248C134F}
 	EndGlobalSection
 EndGlobal
