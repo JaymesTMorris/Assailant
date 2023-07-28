@@ -112,6 +112,7 @@ namespace DataAccess
                     idParam.Value = id;
                     command.Parameters.Add(idParam);
 
+                    command.Transaction = GetTransaction();
                     rowsDeleted = command.ExecuteNonQuery();
                 }
             }
@@ -181,27 +182,30 @@ namespace DataAccess
 
         public CharacterModel Update(CharacterModel model)
         {
-            using (DbCommand cmd = GetConnection().CreateCommand())
+            using (DbConnection connection = GetConnection())
             {
-                cmd.CommandText = @"UPDATE `character` SET name = '@name', characterJSON = '@JSON' WHERE characterId = @characterId);";
+                using (DbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = $@"UPDATE {TableName} SET name = '@name', characterJSON = '@JSON' WHERE characterId = @characterId);";
 
-                DbParameter paramName = cmd.CreateParameter();
-                paramName.ParameterName = "@name";
-                paramName.Value = model.Name;
-                cmd.Parameters.Add(paramName);
+                    DbParameter paramName = command.CreateParameter();
+                    paramName.ParameterName = "@name";
+                    paramName.Value = model.Name;
+                    command.Parameters.Add(paramName);
 
-                DbParameter paramJSON = cmd.CreateParameter();
-                paramJSON.ParameterName = "@JSON";
-                paramJSON.Value = model.JSON;
-                cmd.Parameters.Add(paramJSON);
+                    DbParameter paramJSON = command.CreateParameter();
+                    paramJSON.ParameterName = "@JSON";
+                    paramJSON.Value = model.JSON;
+                    command.Parameters.Add(paramJSON);
 
-                DbParameter paramCharacterId = cmd.CreateParameter();
-                paramCharacterId.ParameterName = "@characterId";
-                paramCharacterId.Value = model.CharacterId;
-                cmd.Parameters.Add(paramCharacterId);
+                    DbParameter paramCharacterId = command.CreateParameter();
+                    paramCharacterId.ParameterName = "@characterId";
+                    paramCharacterId.Value = model.CharacterId;
+                    command.Parameters.Add(paramCharacterId);
 
-                cmd.Transaction = GetTransaction();
-                cmd.ExecuteNonQuery();
+                    command.Transaction = GetTransaction();
+                    command.ExecuteNonQuery();
+                }
             }
             return model;
         }
